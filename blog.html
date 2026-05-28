@@ -499,20 +499,18 @@
 
   <span class="ansi-bold ansi-cyan">[ Hardware Acceleration ]</span>
   ├─ 🟢 <span class="ansi-green">NVIDIA GPU:</span>   Installed
-  ├─ 💾 <span class="ansi-green">Driver Ver:</span>   <span class="ansi-yellow">535.129.03</span>
-  ├─ ⚙️  <span class="ansi-green">NVCC:</span>         CUDA Compiler <span class="ansi-bold ansi-cyan">v12.2</span>
-  ├─ 🚀 <span class="ansi-green">Driver CUDA:</span>  Supports up to CUDA <span class="ansi-magenta">12.2</span>
-  ├─ 🧠 <span class="ansi-green">cuDNN:</span>        <span class="ansi-yellow">v8.9.2</span>
-  └─ ⚡ <span class="ansi-green">TensorRT:</span>     <span class="ansi-red">Not Detected</span>
+  ├─ ⚙️  <span class="ansi-green">NVCC:</span>         CUDA Compiler <span class="ansi-bold ansi-cyan">v11.5</span>
+  ├─ ❌ <span class="ansi-red">cuDNN:</span>        <span class="ansi-dim">Not Detected</span>
+  └─ ❌ <span class="ansi-red">TensorRT:</span>     <span class="ansi-dim">Not Detected</span>
 
   <span class="ansi-bold ansi-cyan">[ Local LLM Orchestration ]</span>
-  ├─ 🦙 <span class="ansi-green">Ollama:</span>       <span class="ansi-yellow">v0.1.32</span> (<span class="ansi-bold ansi-green">Active & Listening (127.0.0.1:11434)</span>)
+  ├─ 🦙 <span class="ansi-green">Ollama:</span>       <span class="ansi-bold ansi-yellow">v0.24.0</span> <span class="ansi-dim">(Warning: client version is 0.18.0) (Active & Listening (127.0.0.1:11434))</span>
   └─ ❌ <span class="ansi-red">llama.cpp:</span>    <span class="ansi-dim">Not Detected (llama-cli / llama-server missing)</span>
 
   <span class="ansi-bold ansi-cyan">[ Deep Learning & Inference Frameworks ]</span>
-  ├─ 🔥 <span class="ansi-green">PyTorch:</span>      <span class="ansi-yellow">v2.1.2</span> ➜ <span class="ansi-bold ansi-green">GPU Enabled (CUDA 12.1)</span>
-  ├─ 🍊 <span class="ansi-green">TensorFlow:</span>   <span class="ansi-dim">Not Installed</span>
-  └─ 🌀 <span class="ansi-green">ONNX Runtime:</span> <span class="ansi-yellow">v1.16.3</span> ➜ Providers: [<span class="ansi-cyan">CPUExecutionProvider, CUDAExecutionProvider</span>]
+  ├─ 🔥 <span class="ansi-green">PyTorch:</span>      <span class="ansi-bold ansi-yellow">v2.7.1+cu118</span> ➜ <span class="ansi-yellow">CPU Only</span>
+  ├─ ❌ <span class="ansi-red">TensorFlow:</span>   <span class="ansi-dim">Not Installed</span>
+  └─ 🌀 <span class="ansi-green">ONNX Runtime:</span> <span class="ansi-bold ansi-yellow">v1.23.2</span> ➜ Providers: [<span class="ansi-cyan">AzureExecutionProvider, CPUExecutionProvider</span>]
                     </div>
 
                     <!-- LLM Tab -->
@@ -520,13 +518,13 @@
 <span class="ansi-bold"># AI/ML Diagnostic Report (LLM-Optimized)</span>
 
 - Python: installed=true, version=3.10.12
-- CUDA: installed=true, nvcc=12.2, driver=535.129.03, max_cuda=12.2
-- cuDNN: installed=true, version=8.9.2
+- CUDA: installed=true, nvcc=11.5, driver=None, max_cuda=None
+- cuDNN: installed=false, version=None
 - TensorRT: installed=false, version=None
-- Ollama: installed=true, version=0.1.32, running=true
-- PyTorch: installed=true, version=2.1.2+cu121, cuda_available=true, torch_cuda_ver=12.1
+- Ollama: installed=true, version=0.24.0, running=true
+- PyTorch: installed=true, version=2.7.1+cu118, cuda_available=false, torch_cuda_ver=11.8
 - TensorFlow: installed=false, version=None, gpu_available=false
-- ONNX Runtime: installed=true, version=1.16.3, providers=["CPUExecutionProvider", "CUDAExecutionProvider"]
+- ONNX Runtime: installed=true, version=1.23.2, providers=["AzureExecutionProvider", "CPUExecutionProvider"]
 - llama.cpp: installed=false, version=None
                     </div>
 
@@ -539,24 +537,24 @@
   <span class="ansi-yellow">}</span>,
   <span class="ansi-cyan">"cuda"</span>: <span class="ansi-yellow">{</span>
     <span class="ansi-cyan">"installed"</span>: <span class="ansi-green">true</span>,
-    <span class="ansi-cyan">"nvcc_version"</span>: <span class="ansi-magenta">"12.2"</span>,
-    <span class="ansi-cyan">"driver_version"</span>: <span class="ansi-magenta">"535.129.03"</span>,
-    <span class="ansi-cyan">"max_supported_cuda"</span>: <span class="ansi-magenta">"12.2"</span>
+    <span class="ansi-cyan">"nvcc_version"</span>: <span class="ansi-magenta">"11.5"</span>,
+    <span class="ansi-cyan">"driver_version"</span>: <span class="ansi-yellow">null</span>,
+    <span class="ansi-cyan">"max_supported_cuda"</span>: <span class="ansi-yellow">null</span>
   <span class="ansi-yellow">}</span>,
   <span class="ansi-cyan">"cudnn"</span>: <span class="ansi-yellow">{</span>
-    <span class="ansi-cyan">"installed"</span>: <span class="ansi-green">true</span>,
-    <span class="ansi-cyan">"version"</span>: <span class="ansi-magenta">"8.9.2"</span>
+    <span class="ansi-cyan">"installed"</span>: <span class="ansi-green">false</span>,
+    <span class="ansi-cyan">"version"</span>: <span class="ansi-yellow">null</span>
   <span class="ansi-yellow">}</span>,
   <span class="ansi-cyan">"ollama"</span>: <span class="ansi-yellow">{</span>
     <span class="ansi-cyan">"installed"</span>: <span class="ansi-green">true</span>,
-    <span class="ansi-cyan">"version"</span>: <span class="ansi-magenta">"0.1.32"</span>,
+    <span class="ansi-cyan">"version"</span>: <span class="ansi-magenta">"0.24.0"</span>,
     <span class="ansi-cyan">"service_running"</span>: <span class="ansi-green">true</span>
   <span class="ansi-yellow">}</span>,
   <span class="ansi-cyan">"pytorch"</span>: <span class="ansi-yellow">{</span>
     <span class="ansi-cyan">"installed"</span>: <span class="ansi-green">true</span>,
-    <span class="ansi-cyan">"version"</span>: <span class="ansi-magenta">"2.1.2+cu121"</span>,
-    <span class="ansi-cyan">"cuda_available"</span>: <span class="ansi-green">true</span>,
-    <span class="ansi-cyan">"cuda_version"</span>: <span class="ansi-magenta">"12.1"</span>
+    <span class="ansi-cyan">"version"</span>: <span class="ansi-magenta">"2.7.1+cu118"</span>,
+    <span class="ansi-cyan">"cuda_available"</span>: <span class="ansi-green">false</span>,
+    <span class="ansi-cyan">"cuda_version"</span>: <span class="ansi-magenta">"11.8"</span>
   <span class="ansi-yellow">}</span>
 <span class="ansi-yellow">}</span>
                     </div>
@@ -649,6 +647,51 @@ print(f"CUDA Available: {diagnostics['cuda']['installed']}")</pre>
             </div>
             <p>
                 By linking this function to your agent's system prompts, the AI no longer has to guess what's installed on your server. It can query the state, identify compilation pathways, detect CUDA failures, and resolve environmental bugs deterministically!
+            </p>
+
+            <!-- LIVE TELEMETRY SHOWCASE SECTION -->
+            <div class="act-title">
+                <span class="color-emerald">📊 Live Telemetry Showcase:</span> Real Diagnostics from the ThinkPad
+            </div>
+            <p>
+                To prove the raw engineering capabilities of <code class="ansi-cyan">devinspect</code>, here is the actual live telemetry recorded directly on the developer's <strong>ThinkPad-P15s-Gen-2i</strong> workstation during our validation loop:
+            </p>
+
+            <div class="terminal-container" style="margin-top: 24px;">
+                <div class="terminal-header">
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="terminal-title">kamal@ThinkPad-P15s-Gen-2i: ~</div>
+                </div>
+                <div class="code-display" style="min-height: auto; padding: 18px;">
+                    <pre><span class="ansi-bold ansi-cyan">$ devinspect summary</span>
+╭──────────────────────────────────────────────────╮
+│ ⚡ SYSTEM SUMMARY                                │
+╰──────────────────────────────────────────────────╯
+  💻 Hostname:    kamal-ThinkPad-P15s-Gen-2i
+  🐧 OS:          Ubuntu 22.04
+  ⚙️  Kernel:      6.8.0-111-generic
+  ⏱️  Uptime:      6h 19m 39s
+  🧠 Memory:      7308 MB used / 15713 MB total
+  🚀 CPU Cores:   8 Cores Active
+
+<span class="ansi-bold ansi-cyan">$ devinspect doctor</span>
+╭──────────────────────────────────────────────────╮
+│ 🩺 SYSTEM DOCTOR MODE: DIAGNOSTICS               │
+╰──────────────────────────────────────────────────╯
+  ⏳  Running environment and dependency diagnostics...
+
+  <span class="ansi-bold ansi-red">❌  [ ERROR ] PyTorch Using CPU on GPU Host</span>
+  ├─ 📝 Description:   An NVIDIA GPU and driver are present, but PyTorch is running in CPU-only mode.
+  ├─ ⚙️  Probable Cause: PyTorch was installed without CUDA acceleration support (likely via standard pip install of default CPU wheels).
+  └─ 🛠️  Remediation:   Reinstall PyTorch with CUDA: 'pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu121'</pre>
+                </div>
+            </div>
+            <p>
+                Notice how the diagnostics engine immediately identified an critical operational issue: <strong>PyTorch was running on the CPU</strong> despite an active NVIDIA GPU configuration! Instead of a generic error code, it outputs a clean description, root cause, and a copy-pasteable command to install the correct GPU-accelerated wheels.
             </p>
 
             <div class="conclusion-box">
