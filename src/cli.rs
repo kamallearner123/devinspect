@@ -35,10 +35,16 @@ pub struct Cli {
     /// Output in YAML format
     #[arg(long, global = true)]
     pub yaml: bool,
+
+    /// Generate AI-friendly report with root-cause hints and remediation suggestions
+    #[arg(long, global = true)]
+    pub llm: bool,
 }
 
 #[derive(Subcommand, Debug)]
 pub enum Commands {
+    /// Validate AI/ML stacks (Python, CUDA, cuDNN, TensorRT, Ollama, PyTorch, TensorFlow, ONNX, llama.cpp)
+    Ai,
     /// Display high-level system summary
     Summary,
     /// Detailed hardware diagnostics

@@ -26,11 +26,15 @@ async fn main() -> anyhow::Result<()> {
             config::AppConfig {
                 default_theme: Some("dark".to_string()),
                 enable_telemetry: Some(false),
+                ollama_host: None,
             }
         }
     };
 
     match &cli.command {
+        Some(cli::Commands::Ai) => {
+            collectors::ai::display_ai(cli.json, cli.yaml, cli.llm);
+        }
         Some(cli::Commands::Summary) => {
             collectors::system::display_summary();
         }
@@ -38,7 +42,7 @@ async fn main() -> anyhow::Result<()> {
             collectors::system::display_hardware();
         }
         Some(cli::Commands::Doctor) => {
-            println!("Doctor mode (Not yet implemented)");
+            collectors::doctor::display_doctor(cli.json, cli.yaml, cli.llm);
         }
         Some(cli::Commands::Network) => {
             collectors::network::display_network();

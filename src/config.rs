@@ -2,10 +2,11 @@ use serde::{Deserialize, Serialize};
 use config::{Config, ConfigError, File};
 use std::path::PathBuf;
 
-#[derive(Debug, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize, Clone)]
 pub struct AppConfig {
     pub default_theme: Option<String>,
     pub enable_telemetry: Option<bool>,
+    pub ollama_host: Option<String>,
 }
 
 impl AppConfig {
