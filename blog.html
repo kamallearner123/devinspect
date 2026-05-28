@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Rise of devinspect: Breaking Free from Terminal Command Fatigue</title>
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Custom Modern Styling & Tokens */
+        :root {
+            --bg-color: #080a10;
+            --card-bg: rgba(17, 22, 37, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            
+            /* Curated Harmonious Gradient Colors */
+            --grad-magenta: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+            --grad-cyan: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+            --grad-emerald: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --grad-amber: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            --grad-sunset: linear-gradient(135deg, #ff416c 0%, #ff4b2b 100%);
+            --grad-card-glow: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.04) 0%, transparent 40%);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Premium Floating Circles background anim */
+        .decor-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: #a855f7;
+            filter: blur(140px);
+            opacity: 0.12;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatGlow 12s infinite ease-in-out alternate;
+        }
+        .decor-glow.one { top: 15%; left: -100px; }
+        .decor-glow.two { top: 60%; right: -100px; background: #06b6d4; animation-delay: -4s; }
+
+        @keyframes floatGlow {
+            0% { transform: translateY(0px) scale(1); }
+            100% { transform: translateY(40px) scale(1.15); }
+        }
+
+        header {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 80px 24px 40px;
+            text-align: center;
+        }
+
+        .category-tag {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 9999px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            background: rgba(168, 85, 247, 0.12);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+            color: #d8b4fe;
+            margin-bottom: 24px;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.1);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #ffffff 30%, #c084fc 70%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .meta-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+
+        .meta-author {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .author-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--grad-magenta);
+            font-weight: bold;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        .meta-divider {
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+        }
+
+        /* Glassmorphism Article Card */
+        main {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto 100px;
+            padding: 0 24px;
+        }
+
+        article {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 56px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        article::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--grad-card-glow);
+            pointer-events: none;
+        }
+
+        /* Colorful Typography Elements */
+        .color-magenta {
+            background: var(--grad-magenta);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .color-cyan {
+            background: var(--grad-cyan);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .color-emerald {
+            background: var(--grad-emerald);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .color-amber {
+            background: var(--grad-amber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .color-sunset {
+            background: var(--grad-sunset);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .act-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 48px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 24px;
+            color: #d1d5db;
+        }
+
+        /* Custom Pullquotes */
+        blockquote {
+            margin: 40px 0;
+            padding: 24px 32px;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 4px solid #a855f7;
+            border-radius: 0 16px 16px 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #e5e7eb;
+            position: relative;
+        }
+
+        /* Custom Interactive Code/Terminal Section */
+        .terminal-container {
+            margin: 48px 0;
+            background: #0b0d16;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .terminal-header {
+            background: #121522;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ef4444; }
+        .dot.yellow { background: #f59e0b; }
+        .dot.green { background: #10b981; }
+
+        .terminal-title {
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .tabs {
+            display: flex;
+            background: #0e111d;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            padding: 12px 20px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .tab-btn.active {
+            color: #c084fc;
+            background: #0b0d16;
+            border-bottom: 2px solid #a855f7;
+        }
+
+        .code-display {
+            padding: 24px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            min-height: 280px;
+            max-height: 500px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .code-pane {
+            display: none;
+        }
+
+        .code-pane.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Color classes for syntax highlighting */
+        .ansi-cyan { color: #22d3ee; }
+        .ansi-green { color: #34d399; }
+        .ansi-yellow { color: #fbbf24; }
+        .ansi-magenta { color: #f472b6; }
+        .ansi-red { color: #f87171; }
+        .ansi-dim { color: #6b7280; }
+        .ansi-bold { font-weight: bold; }
+
+        /* Highlight box */
+        .conclusion-box {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 56px;
+        }
+
+        .conclusion-box h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #f3f4f6;
+            margin-bottom: 12px;
+        }
+
+        /* Footer styling */
+        footer {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 24px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-logo span {
+            background: var(--grad-magenta);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            article { padding: 32px 20px; }
+            .act-title { font-size: 1.5rem; }
+            p { font-size: 1rem; }
+            blockquote { font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="decor-glow one"></div>
+    <div class="decor-glow two"></div>
+
+    <header>
+        <span class="category-tag">Developer Ecosystem</span>
+        <h1>The Rise of <code>devinspect</code>:<br>Breaking Free from Terminal Command Fatigue</h1>
+        <div class="meta-info">
+            <div class="meta-author">
+                <div class="author-avatar">K</div>
+                <span>Kamal</span>
+            </div>
+            <div class="meta-divider"></div>
+            <span>May 28, 2026</span>
+            <div class="meta-divider"></div>
+            <span>6 min read</span>
+        </div>
+    </header>
+
+    <main>
+        <article>
+            <!-- ACT I -->
+            <div class="act-title">
+                <span class="color-sunset">Act I:</span> The Chaos of the Shell
+            </div>
+            <p>
+                Imagine this: It's 11:34 PM. You are trying to deploy a state-of-the-art AI inference pipeline that integrates deep neural compilers. Suddenly, your environment throws a cryptic compilation warning. In a flurry of panic, your fingers fly across the mechanical keyboard. 
+            </p>
+            <p>
+                To trace what's broken, you launch <span class="color-sunset">the digital search party</span>. You run <code class="ansi-cyan">nvidia-smi</code> to check the GPU state. You run <code class="ansi-cyan">nvcc --version</code> to verify the CUDA compiler. You realize you also need memory statistics, so you run <code class="ansi-cyan">free -h</code>. Then you inspect system libraries with <code class="ansi-cyan">lsof</code>, networking rates with <code class="ansi-cyan">ss -tuln</code>, and USB drivers with <code class="ansi-cyan">lsusb</code>.
+            </p>
+            <p>
+                Within minutes, you have twenty open terminal tabs, an overwhelming wall of disjointed logs, and a severe case of **terminal command fatigue**. You have gathered tons of numbers, yet you are no closer to identifying the root cause. The traditional tools speak completely different languages, return wildly inconsistent layouts, and require you to memorize hundreds of cryptic CLI flags.
+            </p>
+
+            <!-- ACT II -->
+            <div class="act-title">
+                <span class="color-magenta">Act II:</span> Enter the Assistant
+            </div>
+            <p>
+                "Why not delegate it to an AI Agent?" you think. You fire up your automated agentic assistant to help debug. But a new roadblock emerges. 
+            </p>
+            <p>
+                To diagnose your local compiler or GPU stack, the AI agent must invoke a series of tool calls. It executes <code class="ansi-cyan">lscpu</code>, parses it, runs another command, and hits a <code class="ansi-red">command not found</code> error. Next, it tries to grep inside <code class="ansi-cyan">/proc/net/dev</code>. Each step burns thousands of tokens, costs money, and invites fragile execution errors as the LLM tries to reconstruct your operating environment from fragmented, unstructured text blocks.
+            </p>
+            <blockquote>
+                "AI agents are brilliant reasoners, but when forced to explore the chaotic landscape of local shell utilities, they trip over missing packages, token limits, and mismatched formats. They don't need raw terminal firehoses; they need structured, normalized environment intelligence."
+            </blockquote>
+
+            <!-- ACT III -->
+            <div class="act-title">
+                <span class="color-cyan">Act III:</span> The Birth of <code>devinspect</code>
+            </div>
+            <p>
+                This friction inspired a radical new vision: **What if a single, secure, offline-first tool could validate your entire workstation instantly, and present it as both a beautiful visual experience for humans and a structured API for AI tools?**
+            </p>
+            <p>
+                Written in stable, blazing-fast <span class="color-cyan">Rust</span>, <code class="ansi-cyan">devinspect</code> was born. It has zero running daemons and operates on minimal read-only privileges. It consolidates hardware inspections, deep network metrics, raw USB tree classifications, automotive SocketCAN states, and complex AI/ML toolchain validations into a single unified binary.
+            </p>
+            <p>
+                It doesn't just run diagnostics—it normalizes the output. Using simple global switches, you can render a visually rich terminal UI dashboard, compile high-density Markdown formatted specifically for LLM context windows, or export structured JSON and YAML.
+            </p>
+
+            <!-- INTERACTIVE WIDGET SECTION -->
+            <div class="act-title">
+                <span class="color-emerald">Live Action:</span> See <code>devinspect</code> in Action
+            </div>
+            <p>
+                Below is a live interactive simulation of how <code class="ansi-cyan">devinspect</code> transforms raw environmental information. Toggle the buttons to see how the same data adapts to different target consumers:
+            </p>
+
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="terminal-title">devinspect --engine v0.1.0</div>
+                </div>
+                <div class="tabs">
+                    <button class="tab-btn active" onclick="switchTab(event, 'pane-tui')">💻 CLI Terminal Output</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'pane-llm')">🤖 LLM-Optimized MD</button>
+                    <button class="tab-btn" onclick="switchTab(event, 'pane-json')">🔌 JSON API Response</button>
+                </div>
+                <div class="code-display">
+                    <!-- TUI Tab -->
+                    <div id="pane-tui" class="code-pane active">
+<span class="ansi-dim">╭──────────────────────────────────────────────────╮</span>
+<span class="ansi-dim">│</span> <span class="ansi-bold ansi-magenta">🧠 AI/ML & LLM STACK VALIDATION</span>                 <span class="ansi-dim">│</span>
+<span class="ansi-dim">╰──────────────────────────────────────────────────╯</span>
+
+  <span class="ansi-bold ansi-cyan">[ Core Runtimes ]</span>
+  ├─ 🐍 <span class="ansi-green">Python3:</span>     <span class="ansi-bold ansi-yellow">3.10.12</span>
+
+  <span class="ansi-bold ansi-cyan">[ Hardware Acceleration ]</span>
+  ├─ 🟢 <span class="ansi-green">NVIDIA GPU:</span>   Installed
+  ├─ 💾 <span class="ansi-green">Driver Ver:</span>   <span class="ansi-yellow">535.129.03</span>
+  ├─ ⚙️  <span class="ansi-green">NVCC:</span>         CUDA Compiler <span class="ansi-bold ansi-cyan">v12.2</span>
+  ├─ 🚀 <span class="ansi-green">Driver CUDA:</span>  Supports up to CUDA <span class="ansi-magenta">12.2</span>
+  ├─ 🧠 <span class="ansi-green">cuDNN:</span>        <span class="ansi-yellow">v8.9.2</span>
+  └─ ⚡ <span class="ansi-green">TensorRT:</span>     <span class="ansi-red">Not Detected</span>
+
+  <span class="ansi-bold ansi-cyan">[ Local LLM Orchestration ]</span>
+  ├─ 🦙 <span class="ansi-green">Ollama:</span>       <span class="ansi-yellow">v0.1.32</span> (<span class="ansi-bold ansi-green">Active & Listening (127.0.0.1:11434)</span>)
+  └─ ❌ <span class="ansi-red">llama.cpp:</span>    <span class="ansi-dim">Not Detected (llama-cli / llama-server missing)</span>
+
+  <span class="ansi-bold ansi-cyan">[ Deep Learning & Inference Frameworks ]</span>
+  ├─ 🔥 <span class="ansi-green">PyTorch:</span>      <span class="ansi-yellow">v2.1.2</span> ➜ <span class="ansi-bold ansi-green">GPU Enabled (CUDA 12.1)</span>
+  ├─ 🍊 <span class="ansi-green">TensorFlow:</span>   <span class="ansi-dim">Not Installed</span>
+  └─ 🌀 <span class="ansi-green">ONNX Runtime:</span> <span class="ansi-yellow">v1.16.3</span> ➜ Providers: [<span class="ansi-cyan">CPUExecutionProvider, CUDAExecutionProvider</span>]
+                    </div>
+
+                    <!-- LLM Tab -->
+                    <div id="pane-llm" class="code-pane">
+<span class="ansi-bold"># AI/ML Diagnostic Report (LLM-Optimized)</span>
+
+- Python: installed=true, version=3.10.12
+- CUDA: installed=true, nvcc=12.2, driver=535.129.03, max_cuda=12.2
+- cuDNN: installed=true, version=8.9.2
+- TensorRT: installed=false, version=None
+- Ollama: installed=true, version=0.1.32, running=true
+- PyTorch: installed=true, version=2.1.2+cu121, cuda_available=true, torch_cuda_ver=12.1
+- TensorFlow: installed=false, version=None, gpu_available=false
+- ONNX Runtime: installed=true, version=1.16.3, providers=["CPUExecutionProvider", "CUDAExecutionProvider"]
+- llama.cpp: installed=false, version=None
+                    </div>
+
+                    <!-- JSON Tab -->
+                    <div id="pane-json" class="code-pane">
+<span class="ansi-yellow">{</span>
+  <span class="ansi-cyan">"python"</span>: <span class="ansi-yellow">{</span>
+    <span class="ansi-cyan">"installed"</span>: <span class="ansi-green">true</span>,
+    <span class="ansi-cyan">"version"</span>: <span class="ansi-magenta">"3.10.12"</span>
+  <span class="ansi-yellow">}</span>,
+  <span class="ansi-cyan">"cuda"</span>: <span class="ansi-yellow">{</span>
+    <span class="ansi-cyan">"installed"</span>: <span class="ansi-green">true</span>,
+    <span class="ansi-cyan">"nvcc_version"</span>: <span class="ansi-magenta">"12.2"</span>,
+    <span class="ansi-cyan">"driver_version"</span>: <span class="ansi-magenta">"535.129.03"</span>,
+    <span class="ansi-cyan">"max_supported_cuda"</span>: <span class="ansi-magenta">"12.2"</span>
+  <span class="ansi-yellow">}</span>,
+  <span class="ansi-cyan">"cudnn"</span>: <span class="ansi-yellow">{</span>
+    <span class="ansi-cyan">"installed"</span>: <span class="ansi-green">true</span>,
+    <span class="ansi-cyan">"version"</span>: <span class="ansi-magenta">"8.9.2"</span>
+  <span class="ansi-yellow">}</span>,
+  <span class="ansi-cyan">"ollama"</span>: <span class="ansi-yellow">{</span>
+    <span class="ansi-cyan">"installed"</span>: <span class="ansi-green">true</span>,
+    <span class="ansi-cyan">"version"</span>: <span class="ansi-magenta">"0.1.32"</span>,
+    <span class="ansi-cyan">"service_running"</span>: <span class="ansi-green">true</span>
+  <span class="ansi-yellow">}</span>,
+  <span class="ansi-cyan">"pytorch"</span>: <span class="ansi-yellow">{</span>
+    <span class="ansi-cyan">"installed"</span>: <span class="ansi-green">true</span>,
+    <span class="ansi-cyan">"version"</span>: <span class="ansi-magenta">"2.1.2+cu121"</span>,
+    <span class="ansi-cyan">"cuda_available"</span>: <span class="ansi-green">true</span>,
+    <span class="ansi-cyan">"cuda_version"</span>: <span class="ansi-magenta">"12.1"</span>
+  <span class="ansi-yellow">}</span>
+<span class="ansi-yellow">}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACT IV -->
+            <div class="act-title">
+                <span class="color-amber">Act IV:</span> A New Dawn for Developers & AI
+            </div>
+            <p>
+                With the deployment of <code class="ansi-cyan">devinspect</code>, system validation enters the modern era. When you bootsrap an AI agent in your folder, its very first step is to issue a simple call to <code class="ansi-cyan">devinspect doctor --json</code>. The agent reads the perfectly formatted JSON, immediately learns that cuDNN is present but TensorRT is missing, and autonomously chooses the optimal neural execution pathways.
+            </p>
+            <p>
+                No more shell syntax guessing. No more broken pipes. No more token waste. 
+            </p>
+            <p>
+                For human developers, running <code class="ansi-cyan">devinspect summary</code> gives a colorful, crystal-clear snapshot of your machine's soul. For automated software agents, the CLI functions as a **structured API client**, bridging the gap between host operations and cloud intelligence.
+            </p>
+
+            <div class="conclusion-box">
+                <h3>The Takeaway</h3>
+                <p style="margin-bottom: 0; font-size: 1.05rem;">
+                    As engineering environments grow more complex and coding agents become our daily collaborators, the tools we use must evolve. By unifying diagnostic discovery into a single, offline-first, highly scriptable Rust binary, <code class="ansi-cyan">devinspect</code> liberates developers from the command line, bringing clarity and control back to the terminal.
+                </p>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-logo">dev<span>inspect</span></div>
+        <p class="footer-text">© 2026 devinspect Project. Built with love in Rust.</p>
+    </footer>
+
+    <script>
+        function switchTab(evt, paneId) {
+            // Get all elements with class="code-pane" and hide them
+            const panes = document.getElementsByClassName("code-pane");
+            for (let i = 0; i < panes.length; i++) {
+                panes[i].classList.remove("active");
+            }
+
+            // Get all elements with class="tab-btn" and remove the class "active"
+            const buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+
+            // Show the current tab, and add an "active" class to the button that opened the tab
+            document.getElementById(paneId).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
