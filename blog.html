@@ -568,13 +568,87 @@
                 <span class="color-amber">Act IV:</span> A New Dawn for Developers & AI
             </div>
             <p>
-                With the deployment of <code class="ansi-cyan">devinspect</code>, system validation enters the modern era. When you bootsrap an AI agent in your folder, its very first step is to issue a simple call to <code class="ansi-cyan">devinspect doctor --json</code>. The agent reads the perfectly formatted JSON, immediately learns that cuDNN is present but TensorRT is missing, and autonomously chooses the optimal neural execution pathways.
+                With the deployment of <code class="ansi-cyan">devinspect</code>, system validation enters the modern era. When you bootstrap an AI agent in your folder, its very first step is to issue a simple call to <code class="ansi-cyan">devinspect doctor --json</code>. The agent reads the perfectly formatted JSON, immediately learns that cuDNN is present but TensorRT is missing, and autonomously chooses the optimal neural execution pathways.
             </p>
             <p>
                 No more shell syntax guessing. No more broken pipes. No more token waste. 
             </p>
             <p>
                 For human developers, running <code class="ansi-cyan">devinspect summary</code> gives a colorful, crystal-clear snapshot of your machine's soul. For automated software agents, the CLI functions as a **structured API client**, bridging the gap between host operations and cloud intelligence.
+            </p>
+
+            <!-- MANUAL OPERATIONS SECTION -->
+            <div class="act-title">
+                <span class="color-cyan">🛠️ Manual Operations:</span> Taking the Reins
+            </div>
+            <p>
+                Running <code class="ansi-cyan">devinspect</code> manually is designed to be frictionless, eliminating the need to memorize dozens of low-level flags. Here is how you can command the terminal directly:
+            </p>
+            <p>
+                • <strong>Quick Snapshot:</strong> To get a visual dashboard of the host environment, CPU cores, active kernel version, and core storage, run:
+                <br><code class="ansi-yellow">devinspect summary</code>
+            </p>
+            <p>
+                • <strong>Deep Hardare Check:</strong> To inspect BIOS details, filesystem mounting blocks, thermal sensors, and memory pressure limits, run:
+                <br><code class="ansi-yellow">devinspect hardware</code>
+            </p>
+            <p>
+                • <strong>Network Diagnostics:</strong> To display active IP configurations, local ports, DNS timings, and latency checks, run:
+                <br><code class="ansi-yellow">devinspect network</code>
+            </p>
+            <p>
+                • <strong>AI/ML Stack Verification:</strong> To see active PyTorch setups, CUDA compilers, cuDNN drivers, and local Ollama server status, run:
+                <br><code class="ansi-yellow">devinspect ai</code>
+            </p>
+            <p>
+                • <strong>System Doctor:</strong> To run an end-to-end analyzer check looking for broken dependencies, missing paths, compiler warnings, and auto-generated remediations, run:
+                <br><code class="ansi-yellow">devinspect doctor</code>
+            </p>
+
+            <!-- AI TOOL ATTACHMENT SECTION -->
+            <div class="act-title">
+                <span class="color-magenta">🔌 Agentic Workflows:</span> Attaching to your AI Tools
+            </div>
+            <p>
+                Because <code class="ansi-cyan">devinspect</code> formats all telemetry in raw machine-readable JSON, it acts as a <strong>universal API broker</strong> for AI developer agents, LLM tool-calling frameworks, and automated terminal loops. 
+            </p>
+            <p>
+                By providing an AI agent with a custom tool definition, you can let the agent introspect the local hardware configurations in real-time. Here is a simple Python pipeline illustrating how an agentic tool executes and ingests the data:
+            </p>
+
+            <div class="terminal-container" style="margin-top: 24px;">
+                <div class="terminal-header">
+                    <div class="dots">
+                        <div class="dot red"></div>
+                        <div class="dot yellow"></div>
+                        <div class="dot green"></div>
+                    </div>
+                    <div class="terminal-title">agent_tool.py</div>
+                </div>
+                <div class="code-display" style="min-height: auto; padding: 18px;">
+                    <pre><span class="ansi-magenta">import</span> subprocess
+<span class="ansi-magenta">import</span> json
+
+<span class="ansi-yellow">def</span> <span class="ansi-cyan">run_devinspect_tool</span>(command=<span class="ansi-green">"doctor"</span>):
+    <span class="ansi-dim"># Execute devinspect as a structured JSON API</span>
+    result = subprocess.run(
+        [<span class="ansi-green">"devinspect"</span>, <span class="ansi-green">"--json"</span>, command], 
+        capture_output=<span class="ansi-yellow">True</span>, 
+        text=<span class="ansi-yellow">True</span>
+    )
+    
+    <span class="ansi-magenta">if</span> result.returncode == 0:
+        <span class="ansi-magenta">return</span> json.loads(result.stdout)
+    <span class="ansi-magenta">else</span>:
+        <span class="ansi-magenta">return</span> {"error": result.stderr}
+
+<span class="ansi-dim"># AI Agent calls tool programmatically</span>
+diagnostics = run_devinspect_tool("ai")
+print(f"CUDA Available: {diagnostics['cuda']['installed']}")</pre>
+                </div>
+            </div>
+            <p>
+                By linking this function to your agent's system prompts, the AI no longer has to guess what's installed on your server. It can query the state, identify compilation pathways, detect CUDA failures, and resolve environmental bugs deterministically!
             </p>
 
             <div class="conclusion-box">
